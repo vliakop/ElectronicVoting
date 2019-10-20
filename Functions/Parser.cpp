@@ -1,4 +1,5 @@
 #include "Parser.h"
+#include "Validator.h"
 #include <cstring>
 #include <iostream>
 
@@ -17,23 +18,35 @@ void parse(char *commandline) {
     // Pare tin entolis
     token = strtok(commandline_copy, " ");
     strcpy(command, token);
+    cout<<"Command given: "<<command<<endl;
+
     // Pare ta orismata
     token = strtok(NULL, "\n");
+    if (token != NULL) {
+        strcpy(arguments, token);
+    }
 
     if (strcmp(command, "lbf") == 0) {
         // TODO lbf
+        keyValidator(token);
     } else if (strcmp(command, "lrb") == 0) {
         // TODO lrb
+        keyValidator(token);
     } else if (strcmp(command, "ins") == 0) {
         // TODO ins
+        recordValidator(token);
     } else if (strcmp(command, "find") == 0) {
         // TODO find
+        keyValidator(token);
     } else if (strcmp(command, "delete") == 0) {
         // TODO delete
+        keyValidator(token);
     } else if (strcmp(command, "vote") == 0) {
         // TODO vote
+        keyValidator(token);
     }  else if (strcmp(command, "load") == 0) {
         // TODO load
+        keyValidator(token);
     } else if (strcmp(command, "voted") == 0) {
         if (token == NULL) {
             // TODO voted
@@ -51,10 +64,7 @@ void parse(char *commandline) {
         cout<<"Wrong command given "<<command<<endl;
     }
 
-    cout<<"Command given: "<<command<<endl;
-    if (token != NULL) {
-        cout<<"Arguments given: "<<arguments<<endl;
-    }
+
     delete []commandline_copy;
 }
 

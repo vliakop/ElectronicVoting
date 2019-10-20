@@ -7,9 +7,8 @@ int main() {
     Voter v("AA107345", "Vasileios", "Liakopoulos", 26, 'M', "13122");
     v.print();
 
-    parse("lbf AA107345");
     parse("lrb key");
-    parse("ins AA107345 Vasileios Liakopoulos 26 M 13122");
+    parse("ins AA107345 Vasileios Liakopoulos M 13122");
     parse("find key");
     parse("delete key");
     parse("vote key");
