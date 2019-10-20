@@ -2,6 +2,7 @@
 #include "Structures/Voter.h"
 #include "Functions/Parser.h"
 #include "Files/FileOperations.h"
+#include "Structures/BloomFilter.h"
 
 using namespace std;
 int main() {
@@ -11,6 +12,12 @@ int main() {
     cout<<"Number of lines for file 100records.csv: "<<countLines("/home/vliakop/CLionProjects/ElectronicVoting/100records.csv");
     readRecords("/home/vliakop/CLionProjects/ElectronicVoting/100records.csv");
 
+    BloomFilter *bf = new BloomFilter(100);
+    char key[] = "AA107345";
+    cout<<"AA107345 exists == "<<bf->exist(key)<<endl;
+    cout<<key<<" inserted in bf"<<endl;
+    bf->insert(key);
+    cout<<"AA107345 exists == "<<bf->exist(key)<<endl;
     parse("lrb key");
     parse("ins AA107345 Vasileios Liakopoulos M 13122");
     parse("find key");
@@ -21,6 +28,8 @@ int main() {
     parse("voted postcodea");
     parse("votedperpc");
     parse("exit");
+
+
 
     return 0;
 }
