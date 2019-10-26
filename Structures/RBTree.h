@@ -20,6 +20,8 @@ public:
 
         Node(Voter *voter, Node *parent = NULL, Node *left = NULL, Node *right = NULL);
         ~Node();
+
+        bool exist(char *identity_number);
     };
     RBTree();
     ~RBTree();
@@ -30,11 +32,14 @@ public:
     void inorder();
     void inorderHelper(Node *);
     int alphabetical_order(char *str1, char *str2);
+    bool exist(char *identity_number); // Added functionality
 
 
 private:
 
     Node *root;
+    int size;
+
     Node* BSTInsert(Node* root, Node *pt);
 };
 

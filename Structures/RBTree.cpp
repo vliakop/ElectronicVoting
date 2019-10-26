@@ -15,9 +15,29 @@ RBTree::Node::~Node() {
     delete voter;
 }
 
+bool RBTree::Node::exist(char *identity_number) {
+
+    if (strcmp(voter->id_number, identity_number) == 0) {
+        return true;
+    }
+    bool left_search = false;
+    bool right_search = false;
+
+    if (left != NULL) { // Search left subtree
+        left_search = left->exist(identity_number);
+    }
+    if (left_search == false && right != NULL) { // If id was not found in left subtree, search the right and return the results
+        right_search = right->exist(identity_number);
+        return right_search;
+    } else { // Else return the (positive) result of left-subtree search
+        return left_search;
+    }
+}
+
 RBTree::RBTree() {
 
     root = NULL;
+    size = 0;
 }
 
 RBTree::~RBTree() {
@@ -50,6 +70,7 @@ void RBTree::insert(Voter *voter)
 
     // fix Red Black Tree violations
     fixViolation(root, pt);
+    size += 1;
 }
 
 /* A utility function to insert a new node with given key
@@ -61,10 +82,11 @@ RBTree::Node* RBTree::BSTInsert(RBTree::Node *root, RBTree::Node *pt) {
         return pt;
 
     /* Otherwise, recur down the tree */
-    if (alphabetical_order(root->voter->id_number, pt->voter->id_number) < 0) { // TODO alphabetical ordering
+    int compare = alphabetical_order(root->voter->id_number, pt->voter->id_number);
+    if (compare < 0) { // TODO alphabetical ordering
         root->left  = BSTInsert(root->left, pt);
         root->left->parent = root;
-    } else if (alphabetical_order(root->voter->id_number, pt->voter->id_number) > 0) {
+    } else if (compare > 0) {
         root->right = BSTInsert(root->right, pt);
         root->right->parent = root;
     }
@@ -127,9 +149,7 @@ void RBTree::fixViolation(Node *&root, Node *&pt)
     Node *parent_pt = NULL;
     Node *grand_parent_pt = NULL;
 
-    while ((pt != root) && (pt->colour != BLACK) &&
-           (pt->parent->colour == RED))
-    {
+    while ((pt != root) && (pt->colour != BLACK) && (pt->parent->colour == RED)) {
 
         parent_pt = pt->parent;
         grand_parent_pt = pt->parent->parent;
@@ -219,4 +239,9 @@ int RBTree::alphabetical_order(char *str1, char *str2) {
     }
     cout<<"compare is "<<compare<<endl;
     return compare;
+}
+
+bool RBTree::exist(char *identity_number) {
+
+    return root->exist(identity_number);
 }

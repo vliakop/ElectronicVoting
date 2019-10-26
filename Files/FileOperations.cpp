@@ -5,15 +5,15 @@
 #include <cstdlib> // TODO remove this line and snipet for tokenizing the line
 
 // Source: https://www.tutorialspoint.com/c-program-to-count-the-number-of-lines-in-a-file
-int countLines(char *filename) {
+unsigned long countLines(char *filename) {
 
     char ch;
-    int linesCount=0;
+    unsigned long linesCount=0;
     FILE *fp;
     fp=fopen(filename,"r");
     if(fp==NULL) {
         printf("File \"%s\" does not exist!!!\n",filename);
-        return -1;
+        return 0;
     }
 
     //read character by character and check for new line
@@ -25,10 +25,10 @@ int countLines(char *filename) {
     fclose(fp);
     //print number of lines
     printf("Total number of lines are: %d\n",linesCount);
-    return 0;
+    return linesCount;
 }
 
-void readRecords(char *filename) {
+void readRecords(char *filename, Fenrir *fenrir) {
 
     char line[500];
     FILE *fp = fopen(filename, "r");
@@ -65,7 +65,8 @@ void readRecords(char *filename) {
 
         Voter *voter = new Voter(identity_number, name, surname, age, gender, postal_code);
         voter->print();
-        delete voter;
+        fenrir->insert(voter);
+//        delete voter; TODO do not delete voter: include it in rbtree destructor: I save the ptr
 
         delete [] postal_code;
         delete []surname;
