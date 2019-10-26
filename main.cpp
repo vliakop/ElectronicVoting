@@ -3,6 +3,7 @@
 #include "Functions/Parser.h"
 #include "Files/FileOperations.h"
 #include "Structures/BloomFilter.h"
+#include "Structures/RBTree.h"
 
 using namespace std;
 int main() {
@@ -29,7 +30,15 @@ int main() {
     parse("votedperpc");
     parse("exit");
 
-
+    RBTree *tree = new RBTree();
+    tree->insert(new Voter("AA107345", "Vasileios", "Liakopoulos", 26, 'M', "13122"));
+    tree->insert(new Voter("AA107346", "Vasileios", "Liakopoulos", 26, 'M', "13122"));
+    tree->insert(new Voter("AA107347", "Vasileios", "Liakopoulos", 26, 'M', "13122"));
+    tree->insert(new Voter("AA107341", "Vasileios", "Liakopoulos", 26, 'M', "13122"));
+    tree->insert(new Voter("AA107343", "Vasileios", "Liakopoulos", 26, 'M', "13122"));
+    tree->insert(new Voter("AA107342", "Vasileios", "Liakopoulos", 26, 'M', "13122"));
+    tree->insert(new Voter("AA107349", "Vasileios", "Liakopoulos", 26, 'M', "13122"));
+    tree->inorder();
 
     return 0;
 }
