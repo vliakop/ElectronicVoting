@@ -22,6 +22,7 @@ public:
         ~Node();
 
         bool exist(char *identity_number);
+        Voter *fetchVoter(char *identity_number);
     };
     RBTree();
     ~RBTree();
@@ -33,6 +34,7 @@ public:
     void inorderHelper(Node *);
     int alphabetical_order(char *str1, char *str2);
     bool exist(char *identity_number); // Added functionality
+    Voter *fetchVoter(char *identity_number);
 
 
 private:

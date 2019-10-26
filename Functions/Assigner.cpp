@@ -1,14 +1,59 @@
 #include "Assigner.h"
 
 #include <cstring>
-void assign(char *command, char *args) {
+#include <cstdlib>
+#include <iostream>
+
+using namespace std;
+
+void assign(char *command, char *args, Fenrir *fenrir) {
 
     if (strcmp(command, "lbf") == 0) {
-        // TODO lbf
+
+        char *key = strtok(args, " \n");
+        bool exist = fenrir->lbf(key);
+        if(exist == false) {
+            cout<<"No"<<endl;
+        } else {
+            cout<<"Probably"<<endl;
+        }
     } else if(strcmp(command, "lrb") == 0) {
-        // TODO lrb
+        char *key = strtok(args, " \n");
+        Voter *voter = fenrir->lrb(key);
+        if (voter == NULL) {
+            cout<<"Voter with id "<<key<<" was not found"<<endl;
+        } else {
+            voter->print();
+        }
     } else if(strcmp(command, "ins") == 0) {
-        // TODO tokenization kool
+
+        // id, name, surname, age, gender, postal code
+        char *token, *id, *name, *surname, *pc, gender;
+        int age;
+
+        token = strtok(args, " "); // Get the id_number
+        id = new char[strlen(token) + 1];
+        strcpy(id, token);
+
+        token = strtok(NULL, " "); // Get the name
+        name = new char[strlen(token) + 1];
+        strcpy(name, token);
+
+        token = strtok(NULL, " "); // Get the surname
+        surname = new char[strlen(token) + 1];
+        strcpy(surname, token);
+
+        token = strtok(NULL, " "); // Get the age
+        age = atoi(token);
+
+        token = strtok(NULL, " "); // Get the gender
+        gender = token[0];
+
+        token = strtok(NULL, " \n"); // Get the postal code
+        pc = new char[strlen(token) + 1];
+        strcpy(pc, token);
+
+        fenrir->insert(new Voter(id, name, surname, age, gender, pc));
     } else if(strcmp(command, "find") == 0) {
         // TODO find
     } else if(strcmp(command, "delete") == 0) {
@@ -19,7 +64,7 @@ void assign(char *command, char *args) {
         // TODO load
     } else if(strcmp(command, "voted") == 0) {
         // todo voted
-    } else if(strcmp(command, "votedpostcode")) {
+    } else if(strcmp(command, "votedpostcode") == 0) {
         // TODO call from Parser with votedposcode arg
     } else if(strcmp(command, "votedperpc") == 0) {
         // TODO votedperpc

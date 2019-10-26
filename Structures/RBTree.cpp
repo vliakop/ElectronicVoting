@@ -34,6 +34,24 @@ bool RBTree::Node::exist(char *identity_number) {
     }
 }
 
+Voter* RBTree::Node::fetchVoter(char *identity_number) {
+
+    if(strcmp(voter->id_number, identity_number) == 0) {
+        return voter;
+    }
+    Voter* left_search = NULL;
+    Voter* right_search = NULL;
+    if (left != NULL) {
+        left_search = left->fetchVoter(identity_number);
+    }
+    if (left_search == NULL && right != NULL) {
+        right_search = right->fetchVoter(identity_number);
+        return right_search;
+    } else {
+        return left_search;
+    }
+}
+
 RBTree::RBTree() {
 
     root = NULL;
@@ -244,4 +262,12 @@ int RBTree::alphabetical_order(char *str1, char *str2) {
 bool RBTree::exist(char *identity_number) {
 
     return root->exist(identity_number);
+}
+
+Voter* RBTree::fetchVoter(char *identity_number) {
+
+    if(exist(identity_number) == false) {
+        return NULL;
+    }
+
 }

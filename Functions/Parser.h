@@ -1,6 +1,8 @@
 #ifndef PARSER_H
 #define PARSER_H
 
-void parse(char *);
+#include "../Structures/Fenrir.h"
+
+void parse(char *, Fenrir *);
 
 #endif

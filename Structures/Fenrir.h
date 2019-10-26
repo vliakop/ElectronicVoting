@@ -19,6 +19,8 @@ public:
     ~Fenrir();
 
      bool insert(Voter *voter);
+     bool lbf(char *);
+     Voter* lrb(char *);
 };
 
 #endif

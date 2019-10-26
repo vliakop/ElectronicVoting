@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void parse(char *commandline) {
+void parse(char *commandline, Fenrir *fenrir) {
 
     char command[14]; // Arketi mnimi gia ti megaliteri entoli pou mporei na dosei o xristis
     char arguments[500];

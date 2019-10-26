@@ -34,3 +34,11 @@ bool Fenrir::insert(Voter *voter) {
         return false;
     }
 }
+
+bool Fenrir::lbf(char *key) {
+    return voters_bf->exist(key);
+}
+
+Voter* Fenrir::lrb(char *key) {
+    return rbTree->fetchVoter(key);
+}
