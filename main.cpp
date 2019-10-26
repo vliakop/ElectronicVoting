@@ -4,6 +4,7 @@
 #include "Files/FileOperations.h"
 #include "Structures/BloomFilter.h"
 #include "Structures/RBTree.h"
+#include "Structures/PCList.h"
 
 using namespace std;
 int main() {
@@ -39,6 +40,18 @@ int main() {
     tree->insert(new Voter("AA107342", "Vasileios", "Liakopoulos", 26, 'M', "13122"));
     tree->insert(new Voter("AA107349", "Vasileios", "Liakopoulos", 26, 'M', "13122"));
     tree->inorder();
+
+    PCList *pcList = new PCList();
+    pcList->insert("13122");
+    pcList->insert("10435");
+    pcList->insertVoterInPC("AA107345", "13122");
+    pcList->insertVoterInPC("AA107345", "10435");
+    pcList->insertVoterInPC("AA100000", "13122");
+
+    pcList->print();
+
+
+    delete pcList;
 
     return 0;
 }
