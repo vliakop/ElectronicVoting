@@ -1,11 +1,12 @@
 #include "Parser.h"
 #include "Validator.h"
+#include "Assigner.h"
 #include <cstring>
 #include <iostream>
 
 using namespace std;
 
-void parse(char *commandline, Fenrir *fenrir) {
+bool parse(char *commandline, Fenrir *fenrir) {
 
     char command[14]; // Arketi mnimi gia ti megaliteri entoli pou mporei na dosei o xristis
     char arguments[500];
@@ -15,7 +16,7 @@ void parse(char *commandline, Fenrir *fenrir) {
     char delims[] = " \n\t";
     char *token;
 
-    // Pare tin entolis
+    // Pare tin entoli
     token = strtok(commandline_copy, " ");
     strcpy(command, token);
     cout<<"Command given: "<<command<<endl;
@@ -26,45 +27,66 @@ void parse(char *commandline, Fenrir *fenrir) {
         strcpy(arguments, token);
     }
 
+    // Validate inputs and assign
     if (strcmp(command, "lbf") == 0) {
-        // TODO lbf
-        keyValidator(token);
+        if(keyValidator(token) == true){
+            assign(command, arguments, fenrir);
+        } else {
+            cout<<"Invalid command syntax"<<endl;
+        }
     } else if (strcmp(command, "lrb") == 0) {
-        // TODO lrb
-        keyValidator(token);
+        if(keyValidator(token) == true) {
+            assign(command, arguments, fenrir);
+        } else {
+            cout<<"Invalid command syntax"<<endl;
+        }
+
     } else if (strcmp(command, "ins") == 0) {
-        // TODO ins
-        recordValidator(token);
+        if(recordValidator(token) == true) {
+            assign(command, arguments, fenrir);
+        } else {
+            cout<<"Invalid command syntax"<<endl;
+        }
     } else if (strcmp(command, "find") == 0) {
-        // TODO find
-        keyValidator(token);
+        if (keyValidator(token) == true) {
+            assign(command, arguments, fenrir);
+        } else {
+            cout<<"Invalid command syntax"<<endl;
+        }
     } else if (strcmp(command, "delete") == 0) {
-        // TODO delete
-        keyValidator(token);
+        if(keyValidator(token) == true) {
+            assign(command, arguments, fenrir);
+        } else {
+            cout<<"Invalid command syntax"<<endl;
+        }
     } else if (strcmp(command, "vote") == 0) {
-        // TODO vote
-        keyValidator(token);
+        if(keyValidator(token) == true) {
+            assign(command, arguments, fenrir);
+        } else {
+            cout<<"Invalid command syntax"<<endl;
+        }
     }  else if (strcmp(command, "load") == 0) {
         // TODO load
         keyValidator(token);
     } else if (strcmp(command, "voted") == 0) {
         if (token == NULL) {
-            // TODO voted
+            assign(command, arguments, fenrir);
         } else if (strcmp(token, "postcode") == 0){
-            // TODO voted postcode
+            char com[] = "votedpostcode";
+            assign(com, arguments, fenrir);
         } else {
             cout<<"Invalid syntax for voted-family functions"<<endl;
         }
-        // TODO voted + voted postcode
     } else if (strcmp(command, "votedperpc") == 0) {
-        // TODO votedperpc
+        assign(command, arguments, fenrir);
     } else if (strcmp(command, "exit") == 0) {
         // TODO exit
+        delete []commandline_copy;
+        return false;
     } else {
         cout<<"Wrong command given "<<command<<endl;
     }
-
-
     delete []commandline_copy;
+    return true;
 }
 

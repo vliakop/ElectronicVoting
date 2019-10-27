@@ -61,8 +61,8 @@ void assign(char *command, char *args, Fenrir *fenrir) {
     } else if(strcmp(command, "find") == 0) {
         char *id_number = strtok(args, " \n");
         Voter *v = fenrir->findKey(id_number);
-        if (v== NULL) {
-            cout<<"No voter with id "<<id_number<<" was found"<<endl;
+        if (v == NULL) {
+            cout<<"No voter with id "<<id_number<<" was not found"<<endl;
         } else {
             v->print();
         }
@@ -70,15 +70,31 @@ void assign(char *command, char *args, Fenrir *fenrir) {
         char *key = strtok(args, " \n");
         fenrir->delet(key);
     } else if(strcmp(command, "vote") == 0) {
-        // TODO vote
+        char *id_number = strtok(args, " \n");
+        int code = fenrir->vote(id_number);
+        if (code == 0) {
+            cout<<"Voter with id "<<id_number<<" was not found"<<endl;
+        } else if (code == 1) {
+            cout<<"Voter with id "<<id_number<<" has succesfully voted"<<endl;
+        } else if (code == 2){
+            cout<<"Voter with id "<<id_number<<" has already voted"<<endl;
+        }
     } else if(strcmp(command, "load") == 0) {
         // TODO load
     } else if(strcmp(command, "voted") == 0) {
-        // todo voted
+        int voted = fenrir->voted_f();
+        cout<<voted<<" voter have voted so far"<<endl;
     } else if(strcmp(command, "votedpostcode") == 0) {
+        char *postcode = strtok(args, " \n");
+        int voted = fenrir->votedpostcode(postcode);
+        if (voted == -1) {
+            cout<<"Area with postal code "<<postcode<<" was not found"<<endl;
+        } else {
+            cout<<voted<<" voters voted in the area with postal code "<<postcode<<endl;
+        }
         // TODO call from Parser with votedposcode arg
     } else if(strcmp(command, "votedperpc") == 0) {
-        // TODO votedperpc
+        fenrir->votedperpc();
     } else if(strcmp(command, "exit") == 0) {
         // TODO exit
     }

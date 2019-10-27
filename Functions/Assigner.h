@@ -3,6 +3,6 @@
 
 #include "../Structures/Fenrir.h"
 
-void assign(char , char *, Fenrir *);
+void assign(char*, char *, Fenrir *);
 
 #endif

@@ -30,6 +30,8 @@ public:
     void delet(char *);
     void vote(char *);
     void print();
+    int getVoted();
+    float statistics();
 };
 
 #endif

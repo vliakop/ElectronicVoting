@@ -72,7 +72,6 @@ void readRecords(char *filename, Fenrir *fenrir) {
         delete []surname;
         delete []name;
         delete []identity_number;
-
     }
     fclose(fp);
 

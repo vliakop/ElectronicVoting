@@ -109,3 +109,17 @@ void IdentityCardList::vote(char *identity_number) {
         node = node->next;
     }
 }
+
+int IdentityCardList::getVoted() {
+
+    return voted;
+}
+
+float IdentityCardList::statistics() {
+
+    if (size - disabled > 0) {
+        return (float) 100 *voted/(size - disabled);
+    } else {
+        return 0;
+    }
+}

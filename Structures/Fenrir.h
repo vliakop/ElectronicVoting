@@ -28,6 +28,9 @@ public:
      Voter* findKeyInPC(char *);
      bool delet(char *);
      int vote(char *);
+     int voted_f();
+     int votedpostcode(char *);
+     void votedperpc();
 };
 
 #endif

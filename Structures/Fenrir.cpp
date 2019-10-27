@@ -87,5 +87,21 @@ int Fenrir::vote(char *key) {
         v->hasVoted = true;
         voted += 1;
         pcList->vote(v->id_number, v->postal_code);
+        return 1;
     }
+}
+
+int Fenrir::voted_f() {
+
+    return voted;
+}
+
+int Fenrir::votedpostcode(char *postal_code) {
+
+    return pcList->votedpostcode(postal_code);
+}
+
+void Fenrir::votedperpc() {
+
+    pcList->votedperpc();
 }

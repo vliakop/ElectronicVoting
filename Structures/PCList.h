@@ -32,6 +32,8 @@ public:
     void insertVoterInPC(char *, char *);
     void deleteVoterFromPC(char *, char *);
     void vote(char *, char *);
+    int votedpostcode(char *);
+    void votedperpc();
 
 };
 

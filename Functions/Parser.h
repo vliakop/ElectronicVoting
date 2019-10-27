@@ -3,6 +3,6 @@
 
 #include "../Structures/Fenrir.h"
 
-void parse(char *, Fenrir *);
+bool parse(char *, Fenrir *);
 
 #endif

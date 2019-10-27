@@ -121,3 +121,27 @@ void PCList::vote(char *key, char *postal_code) {
         node = node->next;
     }
 }
+
+int PCList::votedpostcode(char *postal_code) {
+
+    if(exist(postal_code) == false) {
+        return -1; // Postal Code not found
+    }
+    PCNode *node = start;
+    while (node != NULL) {
+        if (strcmp(node->postal_code, postal_code) == 0) {
+            return node->id_list->getVoted();
+        }
+        node = node->next;
+    }
+}
+
+void PCList::votedperpc() {
+
+    PCNode *node = start;
+    while (node != NULL) {
+        float percentage = node->id_list->statistics();
+        cout<<percentage<<"% turnout for the area with postal code "<<node->postal_code<<endl;
+        node = node->next;
+    }
+}

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdlib> // atoi
+#include <cstdio> // fgets
 #include "Structures/Voter.h"
 #include "Functions/Parser.h"
 #include "Files/FileOperations.h"
@@ -40,10 +41,21 @@ int main(int argc, char *argv[]) {
     bool a = fenrir->lbf("FG112608");
     Voter *v2 = fenrir->lrb("KE112197");
     fenrir->vote("KE112197");
-    fenrir->vote("AAKE112197");
+    fenrir->vote("FG112608");
+    int voted = fenrir->voted_f(); // 2 expected
     fenrir->delet("KE112197");
+    voted = fenrir->voted_f(); // 1 expected
+    fenrir->votedperpc();
     Voter *v3 = fenrir->findKey("KE112197");
 
+    char command[1024];
+    bool ask = true;
+    cout<<"?- ";
+    while((fgets(command, 1024, stdin) != NULL) && ask == true) {
+        ask = parse(command, fenrir);
+        memset(command, '\0', 1024);
+        cout<<"?- ";
+    }
 
     // Memory Cleaning
     delete fenrir;
