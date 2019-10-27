@@ -39,6 +39,7 @@ int main(int argc, char *argv[]) {
     readRecords(inputo_file, fenrir);
     bool a = fenrir->lbf("FG112608");
     Voter *v2 = fenrir->lrb("KE112197");
+    Voter *v3 = fenrir->findKey("KE112197");
 
 
     // Memory Cleaning

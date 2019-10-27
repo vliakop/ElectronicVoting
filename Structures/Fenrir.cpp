@@ -42,3 +42,13 @@ bool Fenrir::lbf(char *key) {
 Voter* Fenrir::lrb(char *key) {
     return rbTree->fetchVoter(key);
 }
+
+Voter* Fenrir::findKey(char *key) {
+
+    bool in_bf = voters_bf->exist(key); // Search in boom filter
+    if (in_bf == false) { // Not found in bloom filter: certainly does not exist
+        return NULL;
+    } else { // If it exists in the bloom filter it could be a false positive, we have to search in the tree
+        return rbTree->fetchVoter(key);
+    }
+}

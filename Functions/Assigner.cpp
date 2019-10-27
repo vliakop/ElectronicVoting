@@ -54,8 +54,18 @@ void assign(char *command, char *args, Fenrir *fenrir) {
         strcpy(pc, token);
 
         fenrir->insert(new Voter(id, name, surname, age, gender, pc));
+        delete id;
+        delete name;
+        delete surname;
+        delete pc;
     } else if(strcmp(command, "find") == 0) {
-        // TODO find
+        char *id_number = strtok(args, " \n");
+        Voter *v = fenrir->findKey(id_number);
+        if (v== NULL) {
+            cout<<"No voter with id "<<id_number<<" was found"<<endl;
+        } else {
+            v->print();
+        }
     } else if(strcmp(command, "delete") == 0) {
         // TODO delete
     } else if(strcmp(command, "vote") == 0) {

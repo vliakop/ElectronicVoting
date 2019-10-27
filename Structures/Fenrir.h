@@ -21,6 +21,7 @@ public:
      bool insert(Voter *voter);
      bool lbf(char *);
      Voter* lrb(char *);
+     Voter* findKey(char *);
 };
 
 #endif
