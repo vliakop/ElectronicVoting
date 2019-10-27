@@ -7,6 +7,7 @@ class IdentityCardList {
     struct IDNode {
         char *identity_number;
         bool hasVoted;
+        bool isActive;
         IDNode *next;
         IDNode *prev;
 
@@ -27,6 +28,7 @@ public:
     void insert(char *);
     bool exist(char *);
     void vote(char *);
+    void delet(char *);
     void print();
 };
 

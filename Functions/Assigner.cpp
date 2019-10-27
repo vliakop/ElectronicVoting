@@ -67,7 +67,8 @@ void assign(char *command, char *args, Fenrir *fenrir) {
             v->print();
         }
     } else if(strcmp(command, "delete") == 0) {
-        // TODO delete
+        char *key = strtok(args, " \n");
+        fenrir->delet(key);
     } else if(strcmp(command, "vote") == 0) {
         // TODO vote
     } else if(strcmp(command, "load") == 0) {

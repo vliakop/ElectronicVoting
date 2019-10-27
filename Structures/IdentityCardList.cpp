@@ -12,6 +12,7 @@ IdentityCardList::IDNode::IDNode(char *identity_number, IDNode *prev, IDNode *ne
     this->next = next;
     this->prev = prev;
     this->hasVoted = false;
+    this->isActive = true;
 }
 
 IdentityCardList::IDNode::~IDNode() {
@@ -76,6 +77,19 @@ void IdentityCardList::print() {
             cout<<"has voted"<<endl;
         } else {
             cout<<"has not voted"<<endl;
+        }
+        node = node->next;
+    }
+}
+
+void IdentityCardList::delet(char *identity_number) {
+
+    IDNode *node = start;
+    while (node != NULL) {
+        if (strcmp(node->identity_number, identity_number) == 0) {
+            node->isActive = false;
+            this->disabled += 1;
+            return;;
         }
         node = node->next;
     }

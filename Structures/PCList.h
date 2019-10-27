@@ -30,6 +30,7 @@ public:
     void print();
 
     void insertVoterInPC(char *, char *);
+    void deleteVoterFromPC(char *, char *);
 
 };
 

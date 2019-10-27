@@ -14,6 +14,8 @@ public:
 
         Voter *voter;
         bool colour;
+        bool hasVoted;
+        bool isActive;
         Node *left;
         Node *right;
         Node *parent;

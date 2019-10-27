@@ -12,6 +12,9 @@ private:
     BloomFilter *voters_bf;
     RBTree *rbTree;
     PCList *pcList;
+    int size;
+    int disabled;
+    int voted;
 
 public:
 
@@ -22,6 +25,8 @@ public:
      bool lbf(char *);
      Voter* lrb(char *);
      Voter* findKey(char *);
+     Voter* findKeyInPC(char *);
+     bool delet(char *);
 };
 
 #endif

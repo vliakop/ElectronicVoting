@@ -12,6 +12,8 @@ public:
     int age;
     char gender;
     char *postal_code;
+    bool isActive;
+    bool hasVoted;
 
     Voter(char *, char *, char *, int, char, char *);
     ~Voter();

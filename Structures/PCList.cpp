@@ -90,3 +90,20 @@ void PCList::insertVoterInPC(char *identity_number, char *postal_code) {
         node = node->next;
     }
 }
+
+void PCList::deleteVoterFromPC(char *identity_number, char *postal_code) {
+
+    if (exist(postal_code) == false) {
+        return;
+    }
+    PCNode *node = start;
+    while (node != NULL) {
+        if (strcmp(node->postal_code, postal_code) == 0) {
+            node->id_list->delet(identity_number);
+            return;
+        } else {
+            node = node->next;
+        }
+    }
+    return;
+}

@@ -5,6 +5,9 @@ Fenrir::Fenrir(unsigned long bf_size) {
     voters_bf = new BloomFilter(bf_size);
     rbTree = new RBTree();
     pcList = new PCList();
+    size = 0;
+    disabled = 0;
+    voted = 0;
 
 }
 
@@ -23,12 +26,14 @@ bool Fenrir::insert(Voter *voter) {
         voters_bf->insert(voter->id_number); // Bloom Filter position must change to 1
         rbTree->insert(voter);
         pcList->insertVoterInPC(voter->id_number, voter->postal_code);
+        size += 1;
         return true;
     } else { // Voter might exist (false positive) in RBTree and PCList - look for him
         bool in_rbtree = rbTree->exist(voter->id_number);
         if (in_rbtree == false) { // If the voter was not found, add him in the data structures
             rbTree->insert(voter);
             pcList->insertVoterInPC(voter->id_number, voter->postal_code);
+            size += 1;
             return true;
         }
         return false;
@@ -51,4 +56,17 @@ Voter* Fenrir::findKey(char *key) {
     } else { // If it exists in the bloom filter it could be a false positive, we have to search in the tree
         return rbTree->fetchVoter(key);
     }
+}
+
+bool Fenrir::delet(char *key) {
+
+    Voter *v = lrb(key);
+    if (v == NULL) {
+        return false;
+    }
+    v->isActive = false;
+    disabled += 1;
+    pcList->deleteVoterFromPC(key, v->postal_code);
+    return true;
+
 }

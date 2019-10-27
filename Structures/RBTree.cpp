@@ -6,6 +6,8 @@ RBTree::Node::Node(Voter *voter, RBTree::Node *parent, RBTree::Node *left, RBTre
 
     this->voter = voter;
     this->parent = parent;
+    this->isActive = true;
+    this->hasVoted = false;
     this->left = left;
     this->right = right;
 }
@@ -51,6 +53,7 @@ Voter* RBTree::Node::fetchVoter(char *identity_number) {
         return left_search;
     }
 }
+
 
 RBTree::RBTree() {
 
@@ -266,7 +269,7 @@ bool RBTree::exist(char *identity_number) {
 
 Voter* RBTree::fetchVoter(char *identity_number) {
 
-    if(exist(identity_number) == false) {
+    if(exist(identity_number) == false) { // TODO xreiazetai?
         return NULL;
     }
     return root->fetchVoter(identity_number);

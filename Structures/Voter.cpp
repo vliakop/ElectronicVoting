@@ -18,6 +18,8 @@ Voter::Voter(char *id_number, char * name, char *surname, int age, char gender, 
     this->age = age;
     this->gender = gender;
     strcpy(this->postal_code, postal_code);
+    this->isActive = true;
+    this->hasVoted = false;
 }
 
 Voter::~Voter() {
