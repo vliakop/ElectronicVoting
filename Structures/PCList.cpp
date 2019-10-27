@@ -105,5 +105,19 @@ void PCList::deleteVoterFromPC(char *identity_number, char *postal_code) {
             node = node->next;
         }
     }
-    return;
+}
+
+void PCList::vote(char *key, char *postal_code) {
+
+    if(exist(postal_code) == false) {
+        return;
+    }
+    PCNode *node = start;
+    while(node != NULL) {
+        if (strcmp(node->postal_code, postal_code) == 0) {
+            node->id_list->vote(key);
+            return;
+        }
+        node = node->next;
+    }
 }

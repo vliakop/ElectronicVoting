@@ -60,13 +60,32 @@ Voter* Fenrir::findKey(char *key) {
 
 bool Fenrir::delet(char *key) {
 
-    Voter *v = lrb(key);
+    Voter *v = rbTree->fetchVoter(key);
+//    Voter *v = lrb(key);
     if (v == NULL) {
         return false;
     }
     v->isActive = false;
     disabled += 1;
+    if (v->hasVoted == true) {
+        voted -= 1;
+    }
     pcList->deleteVoterFromPC(key, v->postal_code);
     return true;
 
+}
+
+int Fenrir::vote(char *key) {
+
+    Voter *v = rbTree->fetchVoter(key);
+    if (v == NULL) {
+        return 0; // Voter does not exist
+    }
+    if (v->hasVoted == true) {
+        return 2; // Voter has already voted
+    } else {
+        v->hasVoted = true;
+        voted += 1;
+        pcList->vote(v->id_number, v->postal_code);
+    }
 }

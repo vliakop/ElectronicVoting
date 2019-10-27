@@ -27,6 +27,7 @@ public:
      Voter* findKey(char *);
      Voter* findKeyInPC(char *);
      bool delet(char *);
+     int vote(char *);
 };
 
 #endif

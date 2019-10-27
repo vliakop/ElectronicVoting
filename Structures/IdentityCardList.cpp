@@ -89,7 +89,22 @@ void IdentityCardList::delet(char *identity_number) {
         if (strcmp(node->identity_number, identity_number) == 0) {
             node->isActive = false;
             this->disabled += 1;
+            if (node->hasVoted == true) {
+                this->voted -= 1;
+            }
             return;;
+        }
+        node = node->next;
+    }
+}
+
+void IdentityCardList::vote(char *identity_number) {
+
+    IDNode *node = start;
+    while (node != NULL) {
+        if (strcmp(node->identity_number, identity_number) == 0) {
+            node->hasVoted = true;
+            this->voted += 1;
         }
         node = node->next;
     }

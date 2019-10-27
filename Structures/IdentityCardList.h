@@ -27,8 +27,8 @@ public:
     ~IdentityCardList();
     void insert(char *);
     bool exist(char *);
-    void vote(char *);
     void delet(char *);
+    void vote(char *);
     void print();
 };
 
