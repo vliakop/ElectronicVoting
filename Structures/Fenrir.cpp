@@ -65,6 +65,9 @@ bool Fenrir::delet(char *key) {
     if (v == NULL) {
         return false;
     }
+    if (v->isActive == false) { // Can't delete a voter if already deleted
+        return false;
+    }
     v->isActive = false;
     disabled += 1;
     if (v->hasVoted == true) {

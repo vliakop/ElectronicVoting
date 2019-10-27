@@ -87,6 +87,9 @@ void IdentityCardList::delet(char *identity_number) {
     IDNode *node = start;
     while (node != NULL) {
         if (strcmp(node->identity_number, identity_number) == 0) {
+            if (node->isActive == false) {  // Can't delete if already deleted
+                return;
+            }
             node->isActive = false;
             this->disabled += 1;
             if (node->hasVoted == true) {
