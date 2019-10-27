@@ -5,7 +5,7 @@
 
 #include "IdentityCardList.h"
 
-class PCList {
+class PCList { // List of Postal Codes - each node includes an id_card list
 
     struct PCNode {
         char *postal_code;

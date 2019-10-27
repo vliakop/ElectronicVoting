@@ -3,6 +3,8 @@
 #include <iostream>
 
 using namespace std;
+
+// Constructor
 Voter::Voter(char *id_number, char * name, char *surname, int age, char gender, char * postal_code) {
 
     // Memory Allocation
@@ -22,6 +24,7 @@ Voter::Voter(char *id_number, char * name, char *surname, int age, char gender, 
     this->hasVoted = false;
 }
 
+// Destructor
 Voter::~Voter() {
 
     // Memory Deallocation
@@ -37,6 +40,7 @@ Voter::~Voter() {
     postal_code = NULL;
 }
 
+// A simple print
 void Voter::print() {
 
     cout<<"Voter info--> ";

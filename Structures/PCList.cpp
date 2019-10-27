@@ -4,6 +4,7 @@
 
 using namespace std;
 
+// Node constructor
 PCList::PCNode::PCNode(char *postal_code, PCNode *prev, PCNode *next) {
 
     this->postal_code = new char[strlen(postal_code) + 1];
@@ -14,12 +15,14 @@ PCList::PCNode::PCNode(char *postal_code, PCNode *prev, PCNode *next) {
     this->prev = prev;
 }
 
+// Node Destructor
 PCList::PCNode::~PCNode() {
 
     delete []postal_code;
     delete id_list;
 }
 
+// List Constructor
 PCList::PCList() {
 
     start = NULL;
@@ -27,6 +30,7 @@ PCList::PCList() {
     size = 0;
 }
 
+// List Destructor
 PCList::~PCList() {
 
     PCList::PCNode *node = start;
@@ -37,6 +41,7 @@ PCList::~PCList() {
     }
 }
 
+// Inserts list for postal code if it doesn not exist
 void PCList::insert(char *postal_code) {
 
     if (exist(postal_code) == true) { // If the postal code already exists, we don't want it again
@@ -52,6 +57,7 @@ void PCList::insert(char *postal_code) {
     size += 1;
 }
 
+// Checks if postal code exists
 bool PCList::exist(char *postal_code) {
 
     if (size > 0) {
@@ -66,6 +72,7 @@ bool PCList::exist(char *postal_code) {
     return false;
 }
 
+// Prints the postal codes and the voters
 void PCList::print() {
 
     PCNode *node = start;
@@ -76,6 +83,7 @@ void PCList::print() {
     }
 }
 
+// Inserts voter info in postal code
 void PCList::insertVoterInPC(char *identity_number, char *postal_code) {
 
     if (exist(postal_code) == false) {
@@ -91,6 +99,7 @@ void PCList::insertVoterInPC(char *identity_number, char *postal_code) {
     }
 }
 
+// Virtually deleted voter from postal code
 void PCList::deleteVoterFromPC(char *identity_number, char *postal_code) {
 
     if (exist(postal_code) == false) {

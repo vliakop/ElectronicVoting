@@ -5,16 +5,16 @@
 #include "RBTree.h"
 #include "PCList.h"
 
-class Fenrir {
+class Fenrir { // Wrapper class for BloomFilter, RBTree and PostCodes
 
 private:
 
     BloomFilter *voters_bf;
     RBTree *rbTree;
     PCList *pcList;
-    int size;
-    int disabled;
-    int voted;
+    int size; // Total voters
+    int disabled; // Total virtually deleted voters
+    int voted; // Total voters who have voted
 
 public:
 

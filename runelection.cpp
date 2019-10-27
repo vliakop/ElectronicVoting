@@ -34,9 +34,9 @@ int main(int argc, char *argv[]) {
     }
     Fenrir *fenrir;
 
-    if (input_file != NULL) {
+    if (input_file != NULL) { // If the input file given, load the voters
         num_of_voters = countLines(input_file);
-        num_of_voters = nextPrime(num_of_voters);
+        num_of_voters = nextPrime(num_of_voters);   // Find the next prime based on the number of voters in the input file
         fenrir = new Fenrir(num_of_voters);
         readRecords(input_file, fenrir);
         cout<<"Voters loaded"<<endl;
@@ -48,7 +48,7 @@ int main(int argc, char *argv[]) {
     bool ask = true;
     cout<<"Command line interface activated"<<endl;
     cout<<"?- ";
-    while((fgets(command, 1024, stdin) != NULL) && ask == true) {   // Read the line given
+    while((fgets(command, 1024, stdin) != NULL) && ask == true) {   // Read until exit is given as a command
         ask = parse(command, fenrir);   // Parse, Validate and Execute
         memset(command, '\0', 1024);
         if (ask == true) {

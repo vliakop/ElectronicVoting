@@ -1,5 +1,6 @@
 #include "Fenrir.h"
 
+// Constructor
 Fenrir::Fenrir(unsigned long bf_size) {
 
     voters_bf = new BloomFilter(bf_size);
@@ -8,9 +9,9 @@ Fenrir::Fenrir(unsigned long bf_size) {
     size = 0;
     disabled = 0;
     voted = 0;
-
 }
 
+// Destructor
 Fenrir::~Fenrir() {
 
     delete voters_bf;
@@ -19,6 +20,7 @@ Fenrir::~Fenrir() {
     int a = 1;
 }
 
+// Inserts the voter
 bool Fenrir::insert(Voter *voter) {
 
     bool in_bf;
@@ -48,14 +50,17 @@ bool Fenrir::insert(Voter *voter) {
     }
 }
 
+// Looks in BloomFilter
 bool Fenrir::lbf(char *key) {
     return voters_bf->exist(key);
 }
 
+// Looks in RBTree
 Voter* Fenrir::lrb(char *key) {
     return rbTree->fetchVoter(key);
 }
 
+// Looks in the Structures
 Voter* Fenrir::findKey(char *key) {
 
     bool in_bf = voters_bf->exist(key); // Search in boom filter
@@ -66,36 +71,37 @@ Voter* Fenrir::findKey(char *key) {
     }
 }
 
+// Virtually deletes a voter by setting the field 'isActive' to false
 int Fenrir::delet(char *key) {
 
     Voter *v = rbTree->fetchVoter(key);
-//    Voter *v = lrb(key);
     if (v == NULL) {
         return 0;   // Not found
     }
     if (v->isActive == false) { // Can't delete a voter if already deleted
         return 0; // Not found
     }
-    v->isActive = false;
+    v->isActive = false; // Virtually delete him
     disabled += 1;
-    if (v->hasVoted == true) {
+    if (v->hasVoted == true) { // One less voter
         voted -= 1;
     }
-    pcList->deleteVoterFromPC(key, v->postal_code);
+    pcList->deleteVoterFromPC(key, v->postal_code); // Virtually delete him from the PostalCode List
     return 1;   // Deleted
 
 }
 
+// Marks hasVoted as true
 int Fenrir::vote(char *key) {
 
     Voter *v = rbTree->fetchVoter(key);
     if (v == NULL) {
         return 0; // Voter does not exist
     } else if (v->isActive == false) {
-        return 0;
+        return 0; // Voter is virtually deleted - cannot vote
     } else if (v->hasVoted == true) {
         return 2; // Voter has already voted
-    } else {
+    } else { // Mark hasVoted = true
         v->hasVoted = true;
         voted += 1;
         pcList->vote(v->id_number, v->postal_code);
@@ -103,16 +109,19 @@ int Fenrir::vote(char *key) {
     }
 }
 
+// Returns the total number of voters
 int Fenrir::voted_f() {
 
     return voted;
 }
 
+// Returns the total number of voters for a given Postal Code
 int Fenrir::votedpostcode(char *postal_code) {
 
     return pcList->votedpostcode(postal_code);
 }
 
+// Prints the percentage of voters for each Postal Code
 void Fenrir::votedperpc() {
 
     pcList->votedperpc();

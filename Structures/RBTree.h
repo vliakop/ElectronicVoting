@@ -7,7 +7,7 @@
 #include "Voter.h"
 #include <cstring>
 
-class RBTree {
+class RBTree { // RedBlackTree Implementations - Adjusted and Expanded code from geeksforgeeks
 
 public:
     struct Node {

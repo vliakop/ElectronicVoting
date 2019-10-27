@@ -4,6 +4,7 @@
 #include <iostream>// TODO remove this and couts;
 using namespace std; // TODO remove this and couts;
 
+// Validates if the arguements if correct (not-NULL)
 bool keyValidator(char *key) {
 
     if (key == NULL) {
@@ -13,6 +14,7 @@ bool keyValidator(char *key) {
     return true;
 }
 
+// Validates if the fields of the record are correct (not-NULL)
 bool recordValidator(char *record) {
 
     if (record == NULL) {

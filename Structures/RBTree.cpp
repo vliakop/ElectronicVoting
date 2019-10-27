@@ -2,6 +2,8 @@
 #include <iostream>
 
 using namespace std;
+
+// Node Constructor
 RBTree::Node::Node(Voter *voter, RBTree::Node *parent, RBTree::Node *left, RBTree::Node *right) {
 
     this->voter = voter;
@@ -12,6 +14,7 @@ RBTree::Node::Node(Voter *voter, RBTree::Node *parent, RBTree::Node *left, RBTre
     this->right = right;
 }
 
+// Node Destructor
 RBTree::Node::~Node() {
 
     delete voter;
@@ -23,15 +26,16 @@ RBTree::Node::~Node() {
     }
 }
 
+// Checks if certain id_number exists
 bool RBTree::Node::exist(char *identity_number) {
 
-    if (strcmp(voter->id_number, identity_number) == 0) {
+    if (strcmp(voter->id_number, identity_number) == 0) {   // If it's the current node return true
         return true;
     }
     bool left_search = false;
     bool right_search = false;
 
-    if (left != NULL) { // Search left subtree
+    if (left != NULL) { // Search the left subtree
         left_search = left->exist(identity_number);
     }
     if (left_search == false && right != NULL) { // If id was not found in left subtree, search the right and return the results
@@ -44,40 +48,42 @@ bool RBTree::Node::exist(char *identity_number) {
 
 Voter* RBTree::Node::fetchVoter(char *identity_number) {
 
-    if(strcmp(voter->id_number, identity_number) == 0) {
+    if(strcmp(voter->id_number, identity_number) == 0) { // If it's the current node return
         return voter;
     }
     Voter* left_search = NULL;
     Voter* right_search = NULL;
-    if (left != NULL) {
+    if (left != NULL) { // Search the left subtree
         left_search = left->fetchVoter(identity_number);
     }
-    if (left_search == NULL && right != NULL) {
+    if (left_search == NULL && right != NULL) { // If id was not found in left subtree, search the right and return the results
         right_search = right->fetchVoter(identity_number);
         return right_search;
-    } else {
+    } else { // Else return the (positive) result of left-subtree search
         return left_search;
     }
 }
 
-
+// Tree Constructor
 RBTree::RBTree() {
 
     root = NULL;
     size = 0;
 }
 
+// Tree Destructor
 RBTree::~RBTree() {
 
     delete root;
 }
 
+// Node visiting pattern - adjusted code from geeksforgeeks
 void RBTree::inorder() {
 
     inorderHelper(root);
 }
 
-// A recursive function to do level order traversal
+// A recursive function to do level order traversal - adjusted code from geeksforgeeks
 void RBTree::inorderHelper(RBTree::Node* root) {
     if (root == NULL)
         return;
@@ -87,7 +93,7 @@ void RBTree::inorderHelper(RBTree::Node* root) {
     inorderHelper(root->right);
 }
 
-// Function to insert a new node with given data
+// Function to insert a new node with given data - adjusted code from geeksforgeeks
 void RBTree::insert(Voter *voter)
 {
     Node *pt = new Node(voter);
@@ -102,7 +108,7 @@ void RBTree::insert(Voter *voter)
 
 /* A utility function to insert a new node with given key
    in BST */
-
+// adjusted code from geeksforgeeks
 RBTree::Node* RBTree::BSTInsert(RBTree::Node *root, RBTree::Node *pt) {
     /* If the tree is empty, return a new node */
     if (root == NULL)
@@ -122,6 +128,7 @@ RBTree::Node* RBTree::BSTInsert(RBTree::Node *root, RBTree::Node *pt) {
     return root;
 }
 
+// adjusted code from geeksforgeeks
 void RBTree::rotateLeft(Node *&root, Node *&pt)
 {
     Node *pt_right = pt->right;
@@ -146,6 +153,7 @@ void RBTree::rotateLeft(Node *&root, Node *&pt)
     pt->parent = pt_right;
 }
 
+// adjusted code from geeksforgeeks
 void RBTree::rotateRight(Node *&root, Node *&pt)
 {
     Node *pt_left = pt->left;
@@ -171,6 +179,7 @@ void RBTree::rotateRight(Node *&root, Node *&pt)
 }
 
 // This function fixes violations caused by BST insertion
+// adjusted code from geeksforgeeks
 void RBTree::fixViolation(Node *&root, Node *&pt)
 {
     Node *parent_pt = NULL;
@@ -243,20 +252,20 @@ void RBTree::fixViolation(Node *&root, Node *&pt)
     root->colour = BLACK;
 }
 
+// Returns the distance between 2 strings
 int RBTree::alphabetical_order(char *str1, char *str2) {
 
     int len1 = strlen(str1);
     int len2 = strlen(str2);
-//    cout<<"Comparing strings "<<str1<<" and "<<str2<<endl;
     int compare = 0;
-    if(len1 < len2) {
+    if(len1 < len2) { // If string1 is longer than string2, compare until string1 is over
         for (int i = 0; i < len1; i++)  {
             if (str1[i] != str2[i]) {
                 compare = (str1[i] - str2[i]);
                 break;
             }
         }
-    } else {
+    } else { // If string12 is longer than string1, compare until string2 is over
         for (int i = 0; i < len2; i++) {
             if (str1[i] != str2[i]) {
                 compare = (str1[i] - str2[i]);
@@ -264,10 +273,10 @@ int RBTree::alphabetical_order(char *str1, char *str2) {
             }
         }
     }
-//    cout<<"compare is "<<compare<<endl;
     return compare;
 }
 
+// Checks if id_number exists
 bool RBTree::exist(char *identity_number) {
 
     if (root == NULL) {
@@ -276,6 +285,7 @@ bool RBTree::exist(char *identity_number) {
     return root->exist(identity_number);
 }
 
+// Returns Voter if exists, else NULL
 Voter* RBTree::fetchVoter(char *identity_number) {
 
     if(exist(identity_number) == false) {

@@ -2,7 +2,7 @@
 #define IDENTITYCARDLIST_H
 
 #include <cstring>
-class IdentityCardList {
+class IdentityCardList { // List of id_numbers with statuses: hasVoted, isActive
 
     struct IDNode {
         char *identity_number;

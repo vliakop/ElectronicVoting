@@ -7,6 +7,7 @@
 
 using namespace std;
 
+// Hashes by one of the 3 hash functions
 unsigned long BloomFilter::hash_by(char *value, int i) {
 
     if (i == 1) {
@@ -18,6 +19,7 @@ unsigned long BloomFilter::hash_by(char *value, int i) {
     }
 }
 
+// Source: stack-overflow
 unsigned long BloomFilter::ascii_hash(char *value) {
 
     size_t len = strlen(value);
@@ -29,6 +31,7 @@ unsigned long BloomFilter::ascii_hash(char *value) {
 
 }
 
+// Source: stack-overflow
 unsigned long BloomFilter::djb2(char *value) {
 
     unsigned long hash = 5381;
@@ -40,6 +43,7 @@ unsigned long BloomFilter::djb2(char *value) {
     return hash;
 }
 
+// Source: stack-overflow
 unsigned long BloomFilter::jenkins_one_at_a_time(char *value) {
 
     size_t len = strlen(value);
@@ -56,6 +60,7 @@ unsigned long BloomFilter::jenkins_one_at_a_time(char *value) {
     return hash;
 }
 
+// Constructor
 BloomFilter::BloomFilter(unsigned long size){
 
     unsigned long i;
@@ -66,14 +71,14 @@ BloomFilter::BloomFilter(unsigned long size){
     }
 }
 
-
+// Destructor
 BloomFilter::~BloomFilter(){
 
     delete []bloomfilter;
 
 }
 
-
+// Bitwise Insert
 void BloomFilter::insert(char *word){
 
     unsigned long hash;
@@ -116,6 +121,7 @@ void BloomFilter::insert(char *word){
     }
 }
 
+// Bitwise Search
 bool BloomFilter::exist(char *word){
 
     unsigned long hash;

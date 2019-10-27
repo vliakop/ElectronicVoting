@@ -6,6 +6,7 @@
 
 using namespace std;
 
+// Parses the user commands and if the input is correct (Validator) the Assigner takes over
 bool parse(char *commandline, Fenrir *fenrir) {
 
     char command[14]; // Arketi mnimi gia ti megaliteri entoli pou mporei na dosei o xristis
@@ -19,7 +20,6 @@ bool parse(char *commandline, Fenrir *fenrir) {
     // Pare tin entoli
     token = strtok(commandline_copy, " \n");
     strcpy(command, token);
-//    cout<<"Command given: "<<command<<endl;
 
     // Pare ta orismata
     token = strtok(NULL, "\n");
@@ -81,7 +81,6 @@ bool parse(char *commandline, Fenrir *fenrir) {
     } else if (strcmp(command, "votedperpc") == 0) {
         assign(command, arguments, fenrir);
     } else if (strcmp(command, "exit") == 0) {
-        // TODO exit
         assign(command, arguments, fenrir);
         delete []commandline_copy;
         return false;

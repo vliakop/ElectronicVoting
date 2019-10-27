@@ -2,6 +2,7 @@
 
 using namespace std;
 
+// Checks if n is prime
 bool isPrime(unsigned long n) {
 
     if (n <= 1){
@@ -21,6 +22,7 @@ bool isPrime(unsigned long n) {
     return true;
 }
 
+// Finds the first prime number greater than or equal to N
 unsigned long nextPrime(unsigned long N)
 {
 

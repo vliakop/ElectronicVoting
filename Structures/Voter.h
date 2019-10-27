@@ -2,7 +2,7 @@
 #ifndef VOTER_H
 #define VOTER_H
 
-class Voter {
+class Voter { // Class representing a Voter and its status
 
 public:
 

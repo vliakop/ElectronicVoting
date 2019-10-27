@@ -1,9 +1,10 @@
 #include "FileOperations.h"
 #include "../Structures/Voter.h"
 #include <cstdio>
-#include <cstring> // TODO remove this line and snipet for tokenizing the line
-#include <cstdlib> // TODO remove this line and snipet for tokenizing the line
+#include <cstring>
+#include <cstdlib>
 
+// Counts lines of a file
 // Source: https://www.tutorialspoint.com/c-program-to-count-the-number-of-lines-in-a-file
 unsigned long countLines(char *filename) {
 
@@ -28,6 +29,7 @@ unsigned long countLines(char *filename) {
     return linesCount;
 }
 
+// Reads voter-records from file and inserts them in the structures
 void readRecords(char *filename, Fenrir *fenrir) {
 
     char line[500];
@@ -37,8 +39,8 @@ void readRecords(char *filename, Fenrir *fenrir) {
         return;
     }
 
-    while(fgets(line, sizeof(line), fp) != NULL) {
-        //fputs(line, stdout);
+    while(fgets(line, sizeof(line), fp) != NULL) {  // Read each line and tokenize the arguements with strtok
+
         char *token = strtok(line, " ");
         char *identity_number = new char[strlen(token) + 1];
         strcpy(identity_number, token);
@@ -61,10 +63,8 @@ void readRecords(char *filename, Fenrir *fenrir) {
         char *postal_code = new char[strlen(token) + 1];
         strcpy(postal_code, token);
 
-        Voter *voter = new Voter(identity_number, name, surname, age, gender, postal_code);
-//        voter->print();
+        Voter *voter = new Voter(identity_number, name, surname, age, gender, postal_code); // Memory free'ed when the RBTree is destroyed
         fenrir->insert(voter);
-//        delete voter; TODO do not delete voter: include it in rbtree destructor: I save the ptr
 
         delete [] postal_code;
         delete []surname;
@@ -74,6 +74,7 @@ void readRecords(char *filename, Fenrir *fenrir) {
     fclose(fp);
 }
 
+// Reads voter IDs and applies "vote"
 void readIDs(char *input_filaname, Fenrir *fenrir) {
 
     char id_number[16];
@@ -83,7 +84,7 @@ void readIDs(char *input_filaname, Fenrir *fenrir) {
         return;
     }
 
-    while(fgets(id_number, sizeof(id_number), fp) != NULL) {
+    while(fgets(id_number, sizeof(id_number), fp) != NULL) {    // Read each line, sanitize the id_number and apply 'vote' for the voter
         char *clear_id_number = strtok(id_number, " \n");
         fenrir->vote(clear_id_number);
     }

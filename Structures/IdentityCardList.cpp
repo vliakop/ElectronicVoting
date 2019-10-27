@@ -4,6 +4,7 @@
 
 using namespace std;
 
+// Node Constructor
 IdentityCardList::IDNode::IDNode(char *identity_number, IDNode *prev, IDNode *next) {
 
     this->identity_number = new char[strlen(identity_number) + 1];
@@ -15,11 +16,13 @@ IdentityCardList::IDNode::IDNode(char *identity_number, IDNode *prev, IDNode *ne
     this->isActive = true;
 }
 
+// Node Destructor
 IdentityCardList::IDNode::~IDNode() {
 
     delete []identity_number;
 }
 
+// List Constructor
 IdentityCardList::IdentityCardList() {
 
     start = NULL;
@@ -29,6 +32,7 @@ IdentityCardList::IdentityCardList() {
     voted = 0;
 }
 
+// List Destructor
 IdentityCardList::~IdentityCardList() {
 
     IdentityCardList::IDNode *node = start;
@@ -39,21 +43,23 @@ IdentityCardList::~IdentityCardList() {
     }
 }
 
+// Insert in list
 void IdentityCardList::insert(char *identity_number) {
 
-    if (size > 0) {
+    if (size > 0) { // If the list has members, check if already exists and add
         if (exist(identity_number) == true) {
             return;
         }
         end->next = new IDNode(identity_number, end);
         end = end->next;
-    } else {
+    } else {    // If it's empty just add
         start = new IDNode(identity_number);
         end = start;
     }
     size += 1;
 }
 
+// Check if id_number exists
 bool IdentityCardList::exist(char *identity_number) {
 
     if (size > 0) {
@@ -68,6 +74,7 @@ bool IdentityCardList::exist(char *identity_number) {
     return false;
 }
 
+// Print the list and who has voted
 void IdentityCardList::print() {
 
     IDNode *node = start;
@@ -82,6 +89,7 @@ void IdentityCardList::print() {
     }
 }
 
+// Virtually delete a voter by setting isActive = false
 void IdentityCardList::delet(char *identity_number) {
 
     IDNode *node = start;
@@ -101,11 +109,12 @@ void IdentityCardList::delet(char *identity_number) {
     }
 }
 
+// Set hasVoted = true
 void IdentityCardList::vote(char *identity_number) {
 
     IDNode *node = start;
     while (node != NULL) {
-        if (strcmp(node->identity_number, identity_number) == 0) {
+        if (strcmp(node->identity_number, identity_number) == 0) { // If voter found mark that he has voted
             node->hasVoted = true;
             this->voted += 1;
         }
@@ -113,11 +122,13 @@ void IdentityCardList::vote(char *identity_number) {
     }
 }
 
+// Return the field 'voted'
 int IdentityCardList::getVoted() {
 
     return voted;
 }
 
+// Return percentage of total voters and those who have voted
 float IdentityCardList::statistics() {
 
     if (size - disabled > 0) {

@@ -6,29 +6,28 @@
 
 using namespace std;
 
+// Receives the command and the arguements. Tokenizes the arguments, Fenrir applies the changes in the structures and prints diagnostics
 void assign(char *command, char *args, Fenrir *fenrir) {
 
     if (strcmp(command, "lbf") == 0) {
-
         char *key = strtok(args, " \n");
         bool exist = fenrir->lbf(key);
-        if(exist == false) {
+        if(exist == false) {    // If not found in BloomFilter, the record does not exist
             cout<<"No"<<endl;
         } else {
-            cout<<"Probably"<<endl;
+            cout<<"Probably"<<endl; // If found, it probably exists (could be a false positive
         }
     } else if(strcmp(command, "lrb") == 0) {
         char *key = strtok(args, " \n");
         Voter *voter = fenrir->lrb(key);
         if (voter == NULL) {
             cout<<"Voter with id "<<key<<" was not found"<<endl;
-        } else if (voter->isActive == false){
+        } else if (voter->isActive == false){   // Virtually deleted
             cout<<"Voter with id "<<key<<" was not found"<<endl;
         } else {
             voter->print();
         }
-    } else if(strcmp(command, "ins") == 0) {
-
+    } else if(strcmp(command, "ins") == 0) { // Tokenizes the input and inserts in the data structures
         // id, name, surname, age, gender, postal code
         char *token, *id, *name, *surname, *pc, gender;
         int age;
@@ -61,7 +60,7 @@ void assign(char *command, char *args, Fenrir *fenrir) {
         delete name;
         delete surname;
         delete pc;
-    } else if(strcmp(command, "find") == 0) {
+    } else if(strcmp(command, "find") == 0) { // Searches in BloomFilter, if found it searches in the RBTree, else prints message
         char *id_number = strtok(args, " \n");
         Voter *v = fenrir->findKey(id_number);
         if (v == NULL) {
@@ -69,27 +68,27 @@ void assign(char *command, char *args, Fenrir *fenrir) {
         } else {
             if (v->isActive == true) {
                 v->print();
-            } else {
-                cout<<"No voter with id "<<id_number<<" was not found"<<endl; // Exclude the virtually deleted
+            } else {   // Exclude the virtually deleted
+                cout<<"No voter with id "<<id_number<<" was not found"<<endl;
             }
 
         }
     } else if(strcmp(command, "delete") == 0) {
         char *key = strtok(args, " \n");
         int code = fenrir->delet(key);
-        if (code == 0) {
+        if (code == 0) { // Not found
             cout<<"Voter with id "<<key<< "was not found"<<endl;
-        } else {
+        } else { // Succesfully virtually deleted
             cout<<"Voter with id "<<key<<" deleted"<<endl;
         }
     } else if(strcmp(command, "vote") == 0) {
         char *id_number = strtok(args, " \n");
         int code = fenrir->vote(id_number);
-        if (code == 0) {
+        if (code == 0) { // Not found
             cout<<"Voter with id "<<id_number<<" was not found"<<endl;
-        } else if (code == 1) {
+        } else if (code == 1) { // Voted
             cout<<"Voter with id "<<id_number<<" has succesfully voted"<<endl;
-        } else if (code == 2){
+        } else if (code == 2){ // Has already voted
             cout<<"Voter with id "<<id_number<<" has already voted"<<endl;
         }
     } else if(strcmp(command, "load") == 0) {
