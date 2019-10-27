@@ -3,6 +3,7 @@
 #include <cstdio> // fgets
 #include "Structures/Voter.h"
 #include "Functions/Parser.h"
+#include "Functions/Implementator.h"
 #include "Files/FileOperations.h"
 #include "Structures/BloomFilter.h"
 #include "Structures/RBTree.h"
@@ -32,11 +33,15 @@ int main(int argc, char *argv[]) {
             }
         }
     }
+    Fenrir *fenrir;
 
 //    if (inputo_file != NULL) {
         num_of_voters = countLines(inputo_file);
+        num_of_voters = nextPrime(num_of_voters);
+//        fenrir = new Fenrir(num_of_voters);
+
 //    }
-    Fenrir *fenrir = new Fenrir(num_of_voters);
+    fenrir = new Fenrir(num_of_voters);
     readRecords(inputo_file, fenrir);
     bool a = fenrir->lbf("FG112608");
     Voter *v2 = fenrir->lrb("KE112197");
@@ -54,7 +59,11 @@ int main(int argc, char *argv[]) {
     while((fgets(command, 1024, stdin) != NULL) && ask == true) {
         ask = parse(command, fenrir);
         memset(command, '\0', 1024);
-        cout<<"?- ";
+        if (ask == true) {
+            cout<<"?- ";
+        } else {
+            break;
+        }
     }
 
     // Memory Cleaning

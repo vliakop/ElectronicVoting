@@ -15,6 +15,12 @@ RBTree::Node::Node(Voter *voter, RBTree::Node *parent, RBTree::Node *left, RBTre
 RBTree::Node::~Node() {
 
     delete voter;
+    if (left != NULL) {
+        delete left;
+    }
+    if (right != NULL) {
+        delete right;
+    }
 }
 
 bool RBTree::Node::exist(char *identity_number) {
@@ -63,7 +69,7 @@ RBTree::RBTree() {
 
 RBTree::~RBTree() {
 
-    // TODO Destructor
+    delete root;
 }
 
 void RBTree::inorder() {
@@ -104,7 +110,7 @@ RBTree::Node* RBTree::BSTInsert(RBTree::Node *root, RBTree::Node *pt) {
 
     /* Otherwise, recur down the tree */
     int compare = alphabetical_order(root->voter->id_number, pt->voter->id_number);
-    if (compare < 0) { // TODO alphabetical ordering
+    if (compare < 0) {
         root->left  = BSTInsert(root->left, pt);
         root->left->parent = root;
     } else if (compare > 0) {
@@ -269,7 +275,7 @@ bool RBTree::exist(char *identity_number) {
 
 Voter* RBTree::fetchVoter(char *identity_number) {
 
-    if(exist(identity_number) == false) { // TODO xreiazetai?
+    if(exist(identity_number) == false) {
         return NULL;
     }
     return root->fetchVoter(identity_number);

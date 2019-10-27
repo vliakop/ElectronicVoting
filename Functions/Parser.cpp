@@ -82,11 +82,11 @@ bool parse(char *commandline, Fenrir *fenrir) {
         assign(command, arguments, fenrir);
     } else if (strcmp(command, "exit") == 0) {
         // TODO exit
+        assign(command, arguments, fenrir);
         delete []commandline_copy;
         return false;
     } else {
         cout<<"Wrong command given: "<<command<<endl;
-        return true; // todo remove it
     }
     delete []commandline_copy;
     return true;

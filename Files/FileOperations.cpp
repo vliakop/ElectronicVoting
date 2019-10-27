@@ -39,8 +39,6 @@ void readRecords(char *filename, Fenrir *fenrir) {
 
     while(fgets(line, sizeof(line), fp) != NULL) {
         //fputs(line, stdout);
-        // TODO add to intimidating structure
-
         char *token = strtok(line, " ");
         char *identity_number = new char[strlen(token) + 1];
         strcpy(identity_number, token);

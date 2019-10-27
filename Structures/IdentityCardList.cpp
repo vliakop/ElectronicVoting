@@ -95,7 +95,7 @@ void IdentityCardList::delet(char *identity_number) {
             if (node->hasVoted == true) {
                 this->voted -= 1;
             }
-            return;;
+            return;
         }
         node = node->next;
     }

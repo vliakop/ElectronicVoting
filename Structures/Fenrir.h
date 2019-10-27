@@ -26,7 +26,7 @@ public:
      Voter* lrb(char *);
      Voter* findKey(char *);
      Voter* findKeyInPC(char *);
-     bool delet(char *);
+     int delet(char *);
      int vote(char *);
      int voted_f();
      int votedpostcode(char *);

@@ -16,6 +16,7 @@ Fenrir::~Fenrir() {
     delete voters_bf;
     delete rbTree;
     delete pcList;
+    int a = 1;
 }
 
 bool Fenrir::insert(Voter *voter) {
@@ -58,15 +59,15 @@ Voter* Fenrir::findKey(char *key) {
     }
 }
 
-bool Fenrir::delet(char *key) {
+int Fenrir::delet(char *key) {
 
     Voter *v = rbTree->fetchVoter(key);
 //    Voter *v = lrb(key);
     if (v == NULL) {
-        return false;
+        return 0;   // Not found
     }
     if (v->isActive == false) { // Can't delete a voter if already deleted
-        return false;
+        return 0; // Not found
     }
     v->isActive = false;
     disabled += 1;
@@ -74,7 +75,7 @@ bool Fenrir::delet(char *key) {
         voted -= 1;
     }
     pcList->deleteVoterFromPC(key, v->postal_code);
-    return true;
+    return 1;   // Deleted
 
 }
 

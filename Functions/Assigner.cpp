@@ -68,7 +68,12 @@ void assign(char *command, char *args, Fenrir *fenrir) {
         }
     } else if(strcmp(command, "delete") == 0) {
         char *key = strtok(args, " \n");
-        fenrir->delet(key);
+        int code = fenrir->delet(key);
+        if (code == 0) {
+            cout<<"Voter with id "<<key<< "was not found"<<endl;
+        } else {
+            cout<<"Voter with id "<<key<<" deleted"<<endl;
+        }
     } else if(strcmp(command, "vote") == 0) {
         char *id_number = strtok(args, " \n");
         int code = fenrir->vote(id_number);
@@ -96,6 +101,6 @@ void assign(char *command, char *args, Fenrir *fenrir) {
     } else if(strcmp(command, "votedperpc") == 0) {
         fenrir->votedperpc();
     } else if(strcmp(command, "exit") == 0) {
-        // TODO exit
+        cout<<"Now exiting..."<<endl;
     }
 }
