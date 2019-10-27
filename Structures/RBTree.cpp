@@ -269,5 +269,6 @@ Voter* RBTree::fetchVoter(char *identity_number) {
     if(exist(identity_number) == false) {
         return NULL;
     }
+    return root->fetchVoter(identity_number);
 
 }

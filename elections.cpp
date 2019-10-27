@@ -37,6 +37,8 @@ int main(int argc, char *argv[]) {
 //    }
     Fenrir *fenrir = new Fenrir(num_of_voters);
     readRecords(inputo_file, fenrir);
+    bool a = fenrir->lbf("FG112608");
+    Voter *v2 = fenrir->lrb("KE112197");
 
 
     // Memory Cleaning
