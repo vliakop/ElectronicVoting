@@ -22,6 +22,8 @@ void assign(char *command, char *args, Fenrir *fenrir) {
         Voter *voter = fenrir->lrb(key);
         if (voter == NULL) {
             cout<<"Voter with id "<<key<<" was not found"<<endl;
+        } else if (voter->isActive == false){
+            cout<<"Voter with id "<<key<<" was not found"<<endl;
         } else {
             voter->print();
         }
@@ -54,6 +56,7 @@ void assign(char *command, char *args, Fenrir *fenrir) {
         strcpy(pc, token);
 
         fenrir->insert(new Voter(id, name, surname, age, gender, pc));
+        cout<<"Executed!"<<endl;
         delete id;
         delete name;
         delete surname;
@@ -64,7 +67,12 @@ void assign(char *command, char *args, Fenrir *fenrir) {
         if (v == NULL) {
             cout<<"No voter with id "<<id_number<<" was not found"<<endl;
         } else {
-            v->print();
+            if (v->isActive == true) {
+                v->print();
+            } else {
+                cout<<"No voter with id "<<id_number<<" was not found"<<endl; // Exclude the virtually deleted
+            }
+
         }
     } else if(strcmp(command, "delete") == 0) {
         char *key = strtok(args, " \n");

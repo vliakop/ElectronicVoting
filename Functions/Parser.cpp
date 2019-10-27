@@ -19,7 +19,7 @@ bool parse(char *commandline, Fenrir *fenrir) {
     // Pare tin entoli
     token = strtok(commandline_copy, " \n");
     strcpy(command, token);
-    cout<<"Command given: "<<command<<endl;
+//    cout<<"Command given: "<<command<<endl;
 
     // Pare ta orismata
     token = strtok(NULL, "\n");

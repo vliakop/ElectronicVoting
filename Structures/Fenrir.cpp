@@ -36,6 +36,13 @@ bool Fenrir::insert(Voter *voter) {
             pcList->insertVoterInPC(voter->id_number, voter->postal_code);
             size += 1;
             return true;
+        } else if (in_rbtree == true) { // If the voter is virtually deleted (exists with isActive = 0 -> activate him)
+            Voter *v = rbTree->fetchVoter(voter->id_number);
+            if (v->isActive == false) {
+                v->isActive = true;
+                v->hasVoted = false;
+                size += 1;
+            }
         }
         return false;
     }
@@ -84,8 +91,9 @@ int Fenrir::vote(char *key) {
     Voter *v = rbTree->fetchVoter(key);
     if (v == NULL) {
         return 0; // Voter does not exist
-    }
-    if (v->hasVoted == true) {
+    } else if (v->isActive == false) {
+        return 0;
+    } else if (v->hasVoted == true) {
         return 2; // Voter has already voted
     } else {
         v->hasVoted = true;

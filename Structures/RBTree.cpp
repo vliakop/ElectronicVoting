@@ -247,7 +247,7 @@ int RBTree::alphabetical_order(char *str1, char *str2) {
 
     int len1 = strlen(str1);
     int len2 = strlen(str2);
-    cout<<"Comparing strings "<<str1<<" and "<<str2<<endl;
+//    cout<<"Comparing strings "<<str1<<" and "<<str2<<endl;
     int compare = 0;
     if(len1 < len2) {
         for (int i = 0; i < len1; i++)  {
@@ -264,12 +264,15 @@ int RBTree::alphabetical_order(char *str1, char *str2) {
             }
         }
     }
-    cout<<"compare is "<<compare<<endl;
+//    cout<<"compare is "<<compare<<endl;
     return compare;
 }
 
 bool RBTree::exist(char *identity_number) {
 
+    if (root == NULL) {
+        return false;
+    }
     return root->exist(identity_number);
 }
 

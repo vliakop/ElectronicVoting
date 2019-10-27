@@ -62,7 +62,7 @@ void readRecords(char *filename, Fenrir *fenrir) {
         strcpy(postal_code, token);
 
         Voter *voter = new Voter(identity_number, name, surname, age, gender, postal_code);
-        voter->print();
+//        voter->print();
         fenrir->insert(voter);
 //        delete voter; TODO do not delete voter: include it in rbtree destructor: I save the ptr
 
