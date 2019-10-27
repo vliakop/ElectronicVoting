@@ -1,0 +1,29 @@
+* runelection.cpp : Main
+
+DOMES DEDOMENON:
+
+* BloomFilter : Pithanotiki domi. Leitourgei opos perigrafetai stin ekfonisi
+    > Hash Function1: ascii_hash
+    > Hash Function2: djb2
+    > Hash Function3:jenkins_one_at_a_time
+    Oi Hash Functions 2 kai 3 apo stackoverflow kai prosarmostikan. I ascii_hash einai to a8roisma tis ascii anaparastasis ton xaraktiron tou string
+    Meta apo testing, i parapano triada emfanizei mikro ari8mo apo collisions metaksu tous
+* Voter: Anaparista enan psifoforo
+* RBTree: RedBlack Tree - meros tou kodika apo geeksforgeeks - prosarmostike kai epekta8ike stis anagkes tis ergasies
+    > Ypostirizetai mono i pros8iki kombon
+    > I diagrafi kombon den ypostirizetai. Ant autou exei ylopoih8ei "eikoniki diagrafi" (virtual delete) xrisimopoiontas ena epipleon pedio, to "isActive". An einai false, o
+        psifoforos 8eoreitai diegrammenos.
+* Lista me tous taxudromikous kodikes (PCList) pou ka8e kombos tis apoteleitai apo mia lista me stoixeia psifoforon (IdentityCardList)
+* Fenrir: Mia domi pou bazei kati apo tin idia "omprella" tis parapano domes gia logous euxristias
+
+LEITOURGIES ARXEION:
+ * FilesOperations.h: Ylopoiountai oi leitourgies:
+    > Metrima Grammon
+    > Diabasma eggrafon psifoforon kai eisagogi tous stis domes
+    > Diabasma eggrafon ari8mon tautotitas efarmogis "vote" (gia tin entoli load)
+
+LEITOURGIES:
+    * Parser: Parsarei tis entoles apo tous xristes. Ana8etei sto Validator kai meta ston Assigner
+    * Validator: Epibebaionei tin yparksi orismaton stis entoles pou dinoun oi xristes
+    * Assigner: Xrisimopoiontas ti domi Fenrir, diaxeirizetai tis entoles ton xriston kai ta apotelesmata auton (typoma diagnostikon minimaton)
+    * Implementator: Arxika sxediastike gia tin ilopoiisi genikon sunartiseon. Telika xrisimopoieitai gia na brei prime ari8mous
