@@ -4,6 +4,7 @@
 #include "../Structures/Fenrir.h"
 
 unsigned long countLines(char *);
-void readRecords(char *, Fenrir *fenrir);
+void readRecords(char *, Fenrir *);
+void readIDs(char *, Fenrir *);
 
 #endif

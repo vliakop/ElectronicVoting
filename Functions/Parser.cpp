@@ -17,7 +17,7 @@ bool parse(char *commandline, Fenrir *fenrir) {
     char *token;
 
     // Pare tin entoli
-    token = strtok(commandline_copy, " ");
+    token = strtok(commandline_copy, " \n");
     strcpy(command, token);
     cout<<"Command given: "<<command<<endl;
 
@@ -66,16 +66,17 @@ bool parse(char *commandline, Fenrir *fenrir) {
             cout<<"Invalid command syntax"<<endl;
         }
     }  else if (strcmp(command, "load") == 0) {
-        // TODO load
-        keyValidator(token);
+        if (keyValidator(token) == true) {
+            assign(command, arguments, fenrir);
+        } else {
+            cout<<"Invalid syntax for voted-family functions"<<endl;
+        }
     } else if (strcmp(command, "voted") == 0) {
         if (token == NULL) {
             assign(command, arguments, fenrir);
-        } else if (strcmp(token, "postcode") == 0){
-            char com[] = "votedpostcode";
-            assign(com, arguments, fenrir);
         } else {
-            cout<<"Invalid syntax for voted-family functions"<<endl;
+            char com[] = "votedpostcode";
+               assign(com, arguments, fenrir);
         }
     } else if (strcmp(command, "votedperpc") == 0) {
         assign(command, arguments, fenrir);
@@ -84,7 +85,8 @@ bool parse(char *commandline, Fenrir *fenrir) {
         delete []commandline_copy;
         return false;
     } else {
-        cout<<"Wrong command given "<<command<<endl;
+        cout<<"Wrong command given: "<<command<<endl;
+        return true; // todo remove it
     }
     delete []commandline_copy;
     return true;

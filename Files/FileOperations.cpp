@@ -24,7 +24,7 @@ unsigned long countLines(char *filename) {
     //close the file
     fclose(fp);
     //print number of lines
-    printf("Total number of lines are: %d\n",linesCount);
+    //printf("Total number of lines are: %d\n",linesCount);
     return linesCount;
 }
 
@@ -74,5 +74,20 @@ void readRecords(char *filename, Fenrir *fenrir) {
         delete []identity_number;
     }
     fclose(fp);
+}
 
+void readIDs(char *input_filaname, Fenrir *fenrir) {
+
+    char id_number[16];
+    FILE *fp = fopen(input_filaname, "r");
+    if (fp == NULL) {
+        printf("File \"%s\" does not exist!!!\n", input_filaname);
+        return;
+    }
+
+    while(fgets(id_number, sizeof(id_number), fp) != NULL) {
+        char *clear_id_number = strtok(id_number, " \n");
+        fenrir->vote(clear_id_number);
+    }
+    fclose(fp);
 }

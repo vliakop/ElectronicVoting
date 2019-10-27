@@ -1,5 +1,5 @@
 #include "Assigner.h"
-
+#include "../Files/FileOperations.h"
 #include <cstring>
 #include <cstdlib>
 #include <iostream>
@@ -80,10 +80,11 @@ void assign(char *command, char *args, Fenrir *fenrir) {
             cout<<"Voter with id "<<id_number<<" has already voted"<<endl;
         }
     } else if(strcmp(command, "load") == 0) {
-        // TODO load
+        char *filename = strtok(args, " \n");
+        readIDs(filename, fenrir);
     } else if(strcmp(command, "voted") == 0) {
         int voted = fenrir->voted_f();
-        cout<<voted<<" voter have voted so far"<<endl;
+        cout<<voted<<" voter(s) have voted so far"<<endl;
     } else if(strcmp(command, "votedpostcode") == 0) {
         char *postcode = strtok(args, " \n");
         int voted = fenrir->votedpostcode(postcode);
@@ -92,7 +93,6 @@ void assign(char *command, char *args, Fenrir *fenrir) {
         } else {
             cout<<voted<<" voters voted in the area with postal code "<<postcode<<endl;
         }
-        // TODO call from Parser with votedposcode arg
     } else if(strcmp(command, "votedperpc") == 0) {
         fenrir->votedperpc();
     } else if(strcmp(command, "exit") == 0) {
