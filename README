@@ -1,37 +1,20 @@
 * runelection.cpp : Main
 
-DOMES DEDOMENON:
+Term project: An attempt to immitate an e-voting system.
+Constraints: Implementation in C/C++, use of STL library forbidden
 
-* BloomFilter : Pithanotiki domi. Leitourgei opos perigrafetai stin ekfonisi
-    > Hash Function1: ascii_hash
-    > Hash Function2: djb2
-    > Hash Function3:jenkins_one_at_a_time
-    Oi Hash Functions 2 kai 3 apo stackoverflow kai prosarmostikan. I ascii_hash einai to a8roisma tis ascii anaparastasis ton xaraktiron tou string
-    Meta apo testing, i parapano triada emfanizei mikro ari8mo apo collisions metaksu tous
-* Voter: Anaparista enan psifoforo
-* RBTree: RedBlack Tree - meros tou kodika apo geeksforgeeks - prosarmostike kai epekta8ike stis anagkes tis ergasies
-    > Ypostirizetai mono i pros8iki kombon
-    > I diagrafi kombon den ypostirizetai. Ant autou exei ylopoih8ei "eikoniki diagrafi" (virtual delete) xrisimopoiontas ena epipleon pedio, to "isActive". An einai false, o
-        psifoforos 8eoreitai diegrammenos.
-* Lista me tous taxudromikous kodikes (PCList) pou ka8e kombos tis apoteleitai apo mia lista me stoixeia psifoforon (IdentityCardList)
-* Fenrir: Mia domi pou bazei kati apo tin idia "omprella" tis parapano domes gia logous euxristias
+Data Structures implemented:
+ 1. A Bloomfilter
+ 2. A Reb-Black Tree
+ 3. Custom classes/structs to represented the entities of the project requirements.
 
-LEITOURGIES ARXEION:
- * FilesOperations.h: Ylopoiountai oi leitourgies:
-    > Metrima Grammon
-    > Diabasma eggrafon psifoforon kai eisagogi tous stis domes
-    > Diabasma eggrafon ari8mon tautotitas efarmogis "vote" (gia tin entoli load)
+Hash functions used:
+ 1. ascii hash
+ 2. djb2
+ 3. jenkins one at a time
 
-LEITOURGIES:
-    * Parser: Parsarei tis entoles apo tous xristes. Ana8etei sto Validator kai meta ston Assigner
-    * Validator: Epibebaionei tin yparksi orismaton stis entoles pou dinoun oi xristes
-    * Assigner: Xrisimopoiontas ti domi Fenrir, diaxeirizetai tis entoles ton xriston kai ta apotelesmata auton (typoma diagnostikon minimaton)
-    * Implementator: Arxika sxediastike gia tin ilopoiisi genikon sunartiseon. Telika xrisimopoieitai gia na brei prime ari8mous
-
-DEN EXOYN YLOPOIHTHEI:
- * Logging
- * Epanadimiourgia domon meta apo kapoio ari8mo apo updates - gia to BloomFilter de 8a eixe noima
-
-ALLES Paradoxes:
- * Gia logous poluplokotites, oi domes kratane statistika otan ginontai energeies (px posoi exoun psifisei, posoi psifoforoi einai energoi). Me auton ton tropo
-  de xreiazetai na diatrexetai ka8e fora olokliri i domi, me apotelesma na kerdizoume xrono se kapoia erotimata
+The following pipeline for the commandline user interface has been implemented:
+ 1. Parser (user input parsing based on a set of acceptable commands)
+ 2. Validator (validates the syntax of the command parsed by Parser)
+ 3. Assigner (assigns the execution of the validated command to proper implementator)
+ 4. Implementator
